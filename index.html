@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>러브버그 제보맵 (단순 지도 이미지)</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { text-align: center; }
+    #map {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    #map img {
+      width: 100%;
+      border: 1px solid #ccc;
+    }
+    #report {
+      margin-top: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #d43f3a;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #log {
+      margin-top: 20px;
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .report-item {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐞 러브버그 제보맵</h1>
+
+  <div id="map">
+    <!-- 지도 이미지를 아래 URL로 대체하거나 로컬 이미지로 변경 가능 -->
+    <img src="https://mblogthumb-phinf.pstatic.net/MjAyMjAzMjJfNTMg/MDAxNjQ3OTE0OTQ2NjEy.w_7Orm0blww0r9-3cMHFgnff72azReDhsXWNXUjNv-Ig._dTqfMR0OLuPujrRP7xQJ5aLWwh9MALws1CMuhDgxEkg.PNG.lwb86/%EC%9A%B0%EB%A6%AC%EB%82%98%EB%9D%BC_%EC%A0%84%EA%B5%AD_%EC%A7%80%EB%8F%841.png?type=w800" alt="대한민국 지도">
+  </div>
+
+  <div id="report">
+    <input type="text" id="desc" placeholder="제보 설명 (예: 7월 16일 서울 관악산 등산로)" />
+    <button onclick="submitReport()">📍 제보 등록</button>
+  </div>
+
+  <div id="log">
+    <h3>📋 제보 목록</h3>
+    <div id="report-list">
+      <p>아직 제보가 없습니다.</p>
+    </div>
+  </div>
+
+  <script>
+    const list = document.getElementById("report-list");
+
+    function submitReport() {
+      const desc = document.getElementById("desc").value.trim();
+      if (!desc) {
+        alert("설명을 입력해주세요.");
+        return;
+      }
+
+      const p = document.createElement("div");
+      p.className = "report-item";
+      p.innerText = `📍 ${desc}`;
+      if (list.querySelector("p")) list.innerHTML = ""; // 초기 "없음" 문구 제거
+      list.appendChild(p);
+
+      document.getElementById("desc").value = "";
+      alert("제보가 등록되었습니다!");
+    }
+  </script>
+
+</body>
+</html>
